@@ -9,7 +9,7 @@ script:
    - hugo
 deploy:
    local_dir: public    # hugo build output path
-   repo: goaxert.github.io  # target repo
+   repo: goaxert/goaxert.github.io  # target repo
    target_branch: master
    provider: pages
    skip_cleanup: true
