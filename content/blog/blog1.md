@@ -3,53 +3,67 @@ title: Hugo & Dimension
 ---
 
 ## Hugo
-기존의 서버에서 편집하는 블로그 방식보다는 Markdown 형식으로 블로그를 유지하고 싶었습니다. Gatsby와 Hugo가 후보였으며 Go에 이끌려 Hugo를 선택하였습니다. 하지만 테마의 선택에서는 Gatsby가 유리합니다.
-그래도 Hugo의 Themes에서 찾은 하나는 Dimension입니다.
+Tistory나 Naver 블로그 방식보다 Markdown 형식으로 블로그를 작성하고 싶었습니다. Gatsby, Hugo가 최종 후보혔지만 Go에 이끌려 Hugo를 선택하였습니다.
 
+Hugo에도 테마는 많이 있지만 마음에 드는 테마는 찾기 어려웠습니다.
+2년동안 업데이트가 없지만 깔끔한 Dimension으로 시작해보겠습니다.
 
-- [Table of contents](#table-of-contents)
-- [Text](#text)
-- [Code](#code)
-  - [Python](#python)
-  - [C/C++](#cc)
-  - [Bash](#bash)
-- [Tables](#tables)
+## Install
 
-## Text
+Hugo를 설치하기 위해서는 go가 필요합니다.
 
-Some example text
-
-## Code
-
-### Python
-
-```python
-def foo():
-    print ("This is a python function")
-```
-
-### C/C++
-
-```C
-void foo(){
-    prinf("%s\n", "This is a C function")
-}
-```
-
-### Bash
+먼저 gvm을 설치합니다.
 
 ```bash
-# This is a bash command
-cd dir && echo $PWD;
+$ bash < <(curl -s -S -L https://raw.githubusercontent.com/moovweb/gvm/master/binscripts/gvm-installer)
 
-# Return
-exit 0;
+$ source ~/.gvm/scripts/gvm
 ```
 
-## Tables
+go를 설치합니다.
 
-| Pages | Elements |
-| ----- | -------- |
-| 1     | Text     |
-| 2     | Code     |
-| 3     | Tables   |
+```bash
+$ gvm install go1.14.3 -B
+$ gvm use go1.14.3 --default
+```
+
+Hugo를 설치합니다.
+
+```bash
+$ mkdir $HOME/src
+$ cd $HOME/src
+$ git clone https://github.com/gohugoio/hugo.git
+$ cd hugo
+$ go install
+```
+
+## using hugo & dimension
+
+Hugo를 이용하여 New Site를 생성합니다.
+
+```bash
+$ hugo new site my-blog
+```
+
+Dimension Theme를 적용합니다.
+```bash
+cd my-blog
+git init
+git submodule add https://gitlab.com/dspechnikov/dimension-hugo themes/dimension
+```
+
+config.toml파일을 수정합니다.
+
+```toml
+baseurl = "/"
+languageCode = "en-us"
+theme = "dimension"
+```
+
+themes/dimension/exampleSite에 content 예제가 있습니다. 해당 디렉토리를 /로 복사합니다.
+
+hugo를 실행하여 블로그의 작동을 확인합니다.
+
+```bash
+$ hugo serve -D
+```
